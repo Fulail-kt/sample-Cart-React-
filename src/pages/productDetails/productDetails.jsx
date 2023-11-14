@@ -2,43 +2,41 @@ import React,{useState} from 'react'
 import { useParams } from 'react-router-dom';
 import { PRODUCTS } from '../../products'
 
-function ProductDetails() {
-
-  const[cart,setCart]=useState([])
-
+function ProductDetails({ cart, setCart }) {
   const addToCart = (productId) => {
-    console.log("Before setCart:", cart);
-    const selectedProduct = PRODUCTS.find(product => product.id === productId);
+    const selectedProduct = PRODUCTS.find((product) => product.id === productId);
+  
     if (selectedProduct) {
-
-      const item = {
-        id: selectedProduct.id,
-        name: selectedProduct.productName,
-        image: selectedProduct.productImage,
-        price:selectedProduct.price
-      };
-
-
-      setCart([...cart, item]);
+      const existingCartItem = cart.find((item) => item.id === productId);
+  
+      if (existingCartItem) {
+        const updatedCart = cart.map((item) =>
+          item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+        );
+        setCart(updatedCart);
+      } else {
+       
+        const newItem = {
+          id: selectedProduct.id,
+          name: selectedProduct.productName,
+          image: selectedProduct.productImage,
+          price: selectedProduct.price,
+          quantity: 1,
+        };
+  
+        setCart([...cart, newItem]);
+      }
     }
-    console.log("After setCart:", cart);
   };
-
-
-
-
   
-  
-
-
 
   const { id } = useParams();
-
-  const product=PRODUCTS.find(product=>product.id == parseInt(id));
+  const product = PRODUCTS.find((product) => product.id === parseInt(id));
 
   if (!product) {
     return <div>Product not found</div>;
   }
+
 
   const productStyle={
       'width':'100%',
@@ -81,16 +79,7 @@ function ProductDetails() {
       <button className="addToCart" onClick={() => addToCart(product.id)}>
   Add To Cart
 </button>
-
       </div>
-
-    {/* <ul>
-        {cart.map(product => (
-          <li key={product.id}>
-            {product.name} - ₹{product.price}
-          </li>
-        ))}
-      </ul> */}
     </div>
   )
 }

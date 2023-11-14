@@ -26,7 +26,7 @@ export const PRODUCTS = [
     {
         id:5,
         productName:'SANG BLEU II TITANIUM WHITE PAVÉ',
-        price:'4,390,000',
+        price:'4390000',
         productImage:'https://www.hublot.com/sites/default/files/styles/watch_tile_472_592/public/2020-06/Big-Bang-Sang-Bleu-II-Titanium-White-Pav%C3%A9-45-mm-soldier-shot.png?itok=kPOySLEV'
     }, {
         id:6,

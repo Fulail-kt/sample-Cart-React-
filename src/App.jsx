@@ -13,18 +13,18 @@ function App() {
 
   
   return (
-    <div className='App'>
+
       
 <Router>
   <Navbar/>
   <Routes>
-    <Route path='/' element={<Shop/>}></Route>
+    <Route path='/' element={<Shop/>}/>
     <Route path='/cart' element={<Cart cart={cart} />} />
-    <Route path='/product/:id' element={<ProductDetails addToCart={setCart} />} />
+    <Route path='/product/:id' element={<ProductDetails cart={cart} setCart={setCart} />} />
+   
   </Routes>
 </Router>
-      
-    </div>
+
   )
 }
 
